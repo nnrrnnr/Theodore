@@ -12,7 +12,11 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            buildConfigField "String", "THEODORE_PACKAGE_NAME", "\"com.github.watanabear.theodore\""
+        }
         release {
+            buildConfigField "String", "THEODORE_PACKAGE_NAME", "\"com.github.watanabear.theodore\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

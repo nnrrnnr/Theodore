@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Theodore</string>
+
+    <string name="title">Title</string>
+    <string name="edit">Edit</string>
+
+    <string name="labels">Labels</string>
+</resources>

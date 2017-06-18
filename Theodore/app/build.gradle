@@ -1,0 +1,81 @@
+apply plugin: 'com.android.application'
+
+
+def versionMajor = 0
+def versionMinor = 0
+def versionPatch = 0
+def versionBuild = 1
+
+def clientIdIsNotSet = true;
+def clientSecretIsNotSet = true;
+
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
+    defaultConfig {
+        applicationId "com.github.watanabear.theodore"
+        minSdkVersion 19
+        targetSdkVersion 25
+        versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
+
+        if (project.hasProperty('theodore_github_client')) {
+            resValue "string", "github_client", pockethub_github_client
+            clientIdIsNotSet = false
+        } else {
+            resValue "string", "github_client", ""
+        }
+
+        if (project.hasProperty('theodore_github_secret')) {
+            resValue "string", "github_secret", pockethub_github_secret
+            clientSecretIsNotSet = false
+        } else {
+            resValue "string", "github_secret", ""
+        }
+
+        if (clientIdIsNotSet || clientSecretIsNotSet) {
+            logger.warn("You won't be able to login, because the oauth client or secret isn't set")
+            logger.warn("Read the README.md: https://github.com/pockethub/PocketHub#setup-environment")
+        }
+
+        String oauth = ""
+        if (project.hasProperty('theodore_github_callback')) {
+            oauth = pockethub_github_callback
+        } else {
+            oauth = ""
+        }
+
+        resValue "string", "github_oauth", oauth
+        resValue "string", "github_oauth_scheme", oauth.split("://")[0]
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    def supportVersion = '25.3.1'
+    compile "com.android.support:appcompat-v7:$supportVersion"
+    compile "com.android.support:support-v4:$supportVersion"
+    compile "com.android.support:design:$supportVersion"
+
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.squareup.okhttp:okhttp:2.7.0'
+
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'io.reactivex.rxjava2:rxjava:2.0.7'
+    compile 'com.trello.rxlifecycle2:rxlifecycle:2.0.1'
+    compile 'com.trello.rxlifecycle2:rxlifecycle-android:2.0.1'
+
+    compile 'com.github.meisolsson:githubsdk:0.4.5'
+
+    compile 'com.afollestad.material-dialogs:core:0.9.4.4'
+
+}
