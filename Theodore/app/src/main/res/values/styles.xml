@@ -1,11 +1,18 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+
+        <item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
+
+        <item name="actionBarStyle">@style/Widget.Styled.ActionBar</item>
+        <item name="android:actionBarStyle">@style/Widget.Styled.ActionBar</item>
+        <item name="windowActionBar">false</item>
     </style>
 
     <style name="TitleText">
@@ -54,4 +61,22 @@
         <item name="android:inputType">text|textAutoCorrect|textCapSentences</item>
     </style>
 
+
+    <style name="Widget.Styled.ActionBar" parent="Widget.AppCompat.ActionBar.Solid">
+        <item name="indeterminateProgressStyle">@style/IndeterminateProgress</item>
+        <item name="android:indeterminateProgressStyle">@style/IndeterminateProgress</item>
+    </style>
+
+
+    <style name="IndeterminateProgress" parent="@android:style/Widget.ProgressBar">
+        <item name="android:indeterminateDrawable">@drawable/actionbar_spinner</item>
+        <item name="android:minWidth">16dp</item>
+    </style>
+
+
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorControlNormal">@android:color/white</item>
+        <item name="colorControlHighlight">@color/ripple_material_dark</item>
+        <item name="colorAccent">#FFFFFF</item>
+    </style>
 </resources>
